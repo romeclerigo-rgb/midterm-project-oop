@@ -108,7 +108,7 @@ public class Validation {
 
                         System.out.println("Name cannot be empty!");
 
-                    } else if (!input.matches("[a-zA-Z0-9 #\\-]+")) {
+                    } else if (!input.matches("[a-zA-Z0-9 #\\\\'\\-;:\"]+")) {
 
                         System.out.println("Invalid name! Please use letters, numbers, hyphens, or # only.");
 
@@ -185,6 +185,35 @@ public class Validation {
                 System.out.println("\nWhat do you want to update?");
                 System.out.println("1. Quantity");
                 System.out.println("2. Price");
+
+                System.out.print("Enter your choice: ");
+                String input = sc.nextLine();
+
+                if (input.matches("[1-2]")) {
+
+                    choice = Integer.parseInt(input);
+                    valid = true;
+
+                } else {
+
+                    System.out.println("Invalid input! Please enter 1 or 2 only.");
+
+                }
+            }
+
+            return choice;
+        }
+
+        public int getSortChoice(Scanner sc) {
+
+            boolean valid = false;
+            int choice = 0;
+
+            while (!valid) {
+
+                System.out.println("\nSort Items:");
+                System.out.println("1. Sort by Name");
+                System.out.println("2. Sort by Price");
 
                 System.out.print("Enter your choice: ");
                 String input = sc.nextLine();

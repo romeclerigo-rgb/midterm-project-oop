@@ -34,11 +34,26 @@ public class Main {
                         int quantity = validation.getQuantity(sc);
                         double price = validation.getPrice(sc);
                         
-                        Item item = new Item(id, name, quantity, price, category);
-                        inventory.addItem(item);
-                        
-                        System.out.println("Item added successfully!");
-                        break;
+                        Item item = null;
+
+                        switch (category) {
+
+                            case "Clothing":
+                                item = new Clothing(id, name, quantity, price, category);
+                                break;
+
+                            case "Electronics":
+                                item = new Electronics(id, name, quantity, price, category);
+                                break;
+
+                            case "Entertainment":
+                                item = new Entertainment(id, name, quantity, price, category);
+                                break;
+                        }
+                            inventory.addItem(item);
+
+                            System.out.println("Item added successfully!");
+                            break;
 
                     case 2:
                         System.out.print("Enter ID: ");
@@ -85,16 +100,65 @@ public class Main {
                         break;
 
                     case 3:
+                        System.out.print("Enter ID: ");
+                        String removeID = sc.nextLine();
+
+                        boolean removed = inventory.removeItem(removeID);
+
+                        if (removed) {
+                            System.out.println("Item removed successfully!");
+
+                        } else {
+                            System.out.println("Item not found!");
+                        }
+                        break;
 
                     case 4:
+                        String displayCategory = validation.getCategory(sc);
+                        inventory.displayByCategory(displayCategory);
+                        break;
 
                     case 5:
+                        inventory.displayAllItems();
+                        break;
 
                     case 6:
+                        System.out.print("Enter ID: ");
+                        String searchID = sc.nextLine();
+
+                        Item searchItem = inventory.findItem(searchID);
+
+                        if (searchItem == null) {
+
+                            System.out.println("Item not found!");
+
+                        } else {
+
+                            searchItem.displayInfo();
+                        }
+
+                        break;
 
                     case 7:
+                        int sortChoice = validation.getSortChoice(sc);
+                        switch (sortChoice) {
+
+                            case 1:
+                                inventory.sortByName();
+                                System.out.println("Items sorted by name.");
+                                break;
+
+                            case 2:
+                                inventory.sortByPrice();
+                                System.out.println("Items sorted by price.");
+                                break;
+                        }
+
+                        break;
 
                     case 8:
+                        inventory.displayLowStockItems();
+                        break;
                         
                     case 9:
                         System.out.println("Program exited!");

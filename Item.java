@@ -1,4 +1,4 @@
-public class Item {
+public abstract class Item {
        
     private String id;
     private String name;
@@ -41,6 +41,8 @@ public class Item {
         public void setPrice(double price) {
             this.price = price;
         }
+        
+        public abstract void displayInfo();
 
     
 }
