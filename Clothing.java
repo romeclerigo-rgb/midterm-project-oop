@@ -6,12 +6,13 @@ public class Clothing extends Item {
 
     @Override
     public void displayInfo() {
-
-        System.out.println(
-            getId() + " | " +
-            getName() + " | " +
-            getQuantity() + " | " +
-            getPrice() + " | Clothing"
+        System.out.printf(
+            "%-10s | %-15s | %-25s | %11s | %13s%n",
+            getId(),
+            getCategory(),
+            getName(),
+            String.format("%,d pcs", getQuantity()),
+            "Php " + String.format("%,.2f", getPrice())
         );
     }
 }

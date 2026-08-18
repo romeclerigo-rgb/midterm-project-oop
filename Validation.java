@@ -8,7 +8,7 @@ public class Validation {
         int choice = 0;
 
         while (!valid) {
-
+            System.out.println("======================================");
             System.out.print("Enter your choice: ");
             String input = sc.nextLine();
 
@@ -26,44 +26,29 @@ public class Validation {
 
         return choice;
     }
-
+        
         public String getCategory(Scanner sc) {
-
             boolean valid = false;
             String category = "";
 
             while (!valid) {
-
-                System.out.println("\nSelect Category:");
-                System.out.println("1. Clothing");
-                System.out.println("2. Electronics");
-                System.out.println("3. Entertainment");
-
-                System.out.print("Enter your choice: ");
+                System.out.print("Enter category: ");
                 String input = sc.nextLine();
+                String fixed = input.toLowerCase();
 
-                switch (input) {
-
-                    case "1":
-                        category = "Clothing";
-                        valid = true;
-                        break;
-
-                    case "2":
-                        category = "Electronics";
-                        valid = true;
-                        break;
-
-                    case "3":
-                        category = "Entertainment";
-                        valid = true;
-                        break;
-
-                    default:
-                        System.out.println("Invalid input! Please enter a number from 1 to 3 only.");
+                if (fixed.equals("clothing")) {
+                    category = "Clothing";
+                    valid = true;
+                } else if (fixed.equals("electronics")) {
+                    category = "Electronics";
+                    valid = true;
+                } else if (fixed.equals("entertainment")) {
+                    category = "Entertainment";
+                    valid = true;
+                } else {
+                    System.out.println("Category " + input + " does not exist!");
                 }
             }
-
             return category;
         }
 
@@ -100,23 +85,15 @@ public class Validation {
             String name = "";
 
                 while (!valid) {
-
                     System.out.print("Enter name: ");
                     String input = sc.nextLine();
 
                     if (input.isEmpty()) {
 
                         System.out.println("Name cannot be empty!");
-
-                    } else if (!input.matches("[a-zA-Z0-9 #\\\\'\\-;:\"]+")) {
-
-                        System.out.println("Invalid name! Please use letters, numbers, hyphens, or # only.");
-
                     } else {
-
                         name = input;
                         valid = true;
-
                     }
                 }
 
@@ -124,7 +101,6 @@ public class Validation {
             }
 
         public int getQuantity(Scanner sc) {
-
             boolean valid = false;
             int quantity = 0;
 
@@ -135,46 +111,47 @@ public class Validation {
 
                 if (input.isEmpty()) {
                     System.out.println("Quantity cannot be empty!");
-
-                } else if (!input.matches("\\d+")) {
-                    System.out.println("Invalid quantity! Please enter a whole number.");
-
+                } else if (!input.matches("[1-9]\\d*")) {
+                    System.out.println("Invalid quantity! Please enter a whole number greater than 0.");
+                } else if (input.length() > 5) {
+                    System.out.println("Invalid quantity! Maximum quantity is 10,000.");
                 } else {
                     quantity = Integer.parseInt(input);
-                    valid = true;
-
+                    if (quantity > 10000) {
+                        System.out.println("Invalid quantity! Maximum quantity is 10,000.");
+                    } else {
+                        valid = true;
+                    }
                 }
             }
-
             return quantity;
         }
 
-        public double getPrice(Scanner sc) {
+       public double getPrice(Scanner sc) {
+           boolean valid = false;
+           double price = 0;
+       
+           while (!valid) {
+       
+               System.out.print("Enter price: ");
+               String input = sc.nextLine();
+               if (input.isEmpty()) {      
+                   System.out.println("Price cannot be empty!");     
+               } else if (!input.matches("\\d+(\\.\\d+)?")) {
+                   System.out.println("Invalid price! Please enter a valid number.");
+               } else {
+                   price = Double.parseDouble(input);
+                   if (price <= 0) {
+                       System.out.println("Price must be greater than 0.");
+                   } else {
+                       valid = true;
+                   }
+               }
+           }
+       
+           return price;
+       }
 
-            boolean valid = false;
-            double price = 0;
-
-            while (!valid) {
-
-                System.out.print("Enter price: ");
-                String input = sc.nextLine();
-
-                if (input.isEmpty()) {
-                    System.out.println("Price cannot be empty!");
-
-                } else if (!input.matches("\\d+(\\.\\d+)?")) {
-                    System.out.println("Invalid price! Please enter a valid number.");
-
-                } else {
-
-                    price = Double.parseDouble(input);
-                    valid = true;
-
-                }
-            }
-
-            return price;
-        }
         public int getUpdateChoice(Scanner sc) {
 
             boolean valid = false;
@@ -212,7 +189,7 @@ public class Validation {
             while (!valid) {
 
                 System.out.println("\nSort Items:");
-                System.out.println("1. Sort by Name");
+                System.out.println("1. Sort by Quantity");
                 System.out.println("2. Sort by Price");
 
                 System.out.print("Enter your choice: ");
