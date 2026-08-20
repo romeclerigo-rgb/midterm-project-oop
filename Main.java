@@ -9,10 +9,12 @@ public class Main {
     }
 
 public static void printMessage(String message) {
-        System.out.println("======================================");
-        System.out.printf(" %-37s %n", message);
-        System.out.println("======================================");
-    }
+    int width = Math.max(38, message.length() + 2);
+
+    System.out.println("=".repeat(width));
+    System.out.printf("%-" + width + "s%n", " " + message);
+    System.out.println("=".repeat(width));
+}
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);   
         Validation validation = new Validation();
@@ -43,6 +45,11 @@ public static void printMessage(String message) {
                         printHeader("ADD ITEM");
 
                         String category = validation.getCategory(sc);
+
+                        if (category.isEmpty()) {
+                            break;
+                        }
+
                         String id = validation.getItemID(sc, inventory);
                         String name = validation.getItemName(sc);
                         int quantity = validation.getQuantity(sc);
@@ -62,17 +69,25 @@ public static void printMessage(String message) {
                             case "Entertainment":
                                 item = new Entertainment(id, name, quantity, price, category);
                                 break;
+
+                            default:
+                                printMessage("Category does not exist!");
+                                break;
                         }
 
-                        inventory.addItem(item);
-                        printMessage("Item added successfully!");
+                        if (item != null) {
+                            inventory.addItem(item);
+                            printMessage("Item added successfully!");
+                        }
                         break;
 
                     case 2:
                         if (inventory.isEmpty()) {
+
                             printMessage("No items yet.");
 
                         } else {
+
                             printHeader("UPDATE ITEM");
 
                             System.out.print("Enter ID: ");
@@ -81,18 +96,23 @@ public static void printMessage(String message) {
                             Item updateItem = inventory.findItem(updateID);
 
                             if (updateItem == null) {
+
                                 printMessage("Item not found!");
+
                             } else {
+
                                 int updateChoice = validation.getUpdateChoice(sc);
 
                                 switch (updateChoice) {
+
                                     case 1:
                                         int oldQuantity = updateItem.getQuantity();
-                                        int newQuantity = validation.getQuantity(sc);
+                                        int newQuantity = validation.getUpdateQuantity(sc);
                                         inventory.updateQuantity(updateItem, newQuantity);
 
-                                        printHeader("Quantity updated from "
-                                                + oldQuantity + " to " + newQuantity + ".");
+                                        printMessage("Quantity of " + updateItem.getName()
+                                                + " updated from " + oldQuantity
+                                                + " to " + newQuantity + ".");
                                         break;
 
                                     case 2:
@@ -100,14 +120,16 @@ public static void printMessage(String message) {
                                         double newPrice = validation.getPrice(sc);
 
                                         inventory.updatePrice(updateItem, newPrice);
-                                        System.out.println("======================================");
-                                        System.out.printf("Price updated from Php%,.2f to Php%,.2f.%n",
-                                                oldPrice, newPrice);
-                                        System.out.println("======================================");
+
+                                        printMessage("Price of " + updateItem.getName()
+                                                + " updated from Php" + String.format("%,.2f", oldPrice)
+                                                + " to Php" + String.format("%,.2f", newPrice) + ".");
+
                                         break;
                                 }
                             }
                         }
+
                         break;
 
                     case 3:
@@ -122,7 +144,7 @@ public static void printMessage(String message) {
 
                             boolean removed = inventory.removeItem(removeID);
                             if (removed) {
-                                printMessage("Item removed successfully!");
+                                printMessage("Item has been removed from the inventory!");
                             } else {
                                 printMessage("Item not found!");
                             }
@@ -131,13 +153,20 @@ public static void printMessage(String message) {
 
                     case 4:
                         if (inventory.isEmpty()) {
+
                             printMessage("No items yet.");
+
                         } else {
 
                             printHeader("DISPLAY BY CATEGORY");
+
                             String displayCategory = validation.getCategory(sc);
-                            inventory.displayByCategory(displayCategory);
+
+                            if (!displayCategory.isEmpty()) {
+                                inventory.displayByCategory(displayCategory);
+                            }
                         }
+
                         break;
 
                     case 5:
@@ -174,25 +203,31 @@ public static void printMessage(String message) {
                     case 7:
                         if (inventory.isEmpty()) {
                             printMessage("No items yet.");
+
                         } else {
                             printHeader("SORT ITEMS");
+                            int orderChoice = validation.getOrderChoice(sc);
+                            boolean ascending = (orderChoice == 1);
 
-                            int sortChoice = validation.getSortChoice(sc);
-
-                            switch (sortChoice) {
+                            switch (orderChoice) {
                                 case 1:
-                                    inventory.sortByQuantity();
-                                    printMessage("Items sorted by quantity.");
+                                    inventory.sortByQuantity(ascending);
                                     break;
 
                                 case 2:
-                                    inventory.sortByPrice();
-                                    printMessage("Items sorted by price.");
+                                    inventory.sortByPrice(ascending);
                                     break;
                             }
+                            if (ascending) {
+                                printMessage("Items sorted in Ascending order successfully!");
+                            } else {
+                                printMessage("Items sorted in Descending order successfully!");
+                            }
+                            inventory.displayAllItems();
                         }
 
                         break;
+                        
                     case 8:
                         if (inventory.isEmpty()) {
                             printMessage("No items yet.");

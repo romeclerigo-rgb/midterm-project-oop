@@ -7,12 +7,12 @@ public class Entertainment extends Item {
     @Override
     public void displayInfo() {
         System.out.printf(
-            "%-10s | %-15s | %-25s | %11s | %13s%n",
-            getId(),
-            getCategory(),
-            getName(),
-            String.format("%,d pcs", getQuantity()),
-            "Php " + String.format("%,.2f", getPrice())
-        );
+        "%-25s | %-15s | %-25s | %12dpcs | Php%12.2f%n",
+        getId(),
+        getCategory(),
+        getName(),
+        getQuantity(),
+        getPrice()
+    );
     }
 }

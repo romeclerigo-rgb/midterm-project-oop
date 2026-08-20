@@ -95,23 +95,36 @@ public class Inventory {
     }
 
     public void displayTableHeader() {
-        System.out.println("=============================================================================================");
-        System.out.printf(
-            "%-10s | %-15s | %-25s | %11s | %13s%n",
-            "ID",
-            "Category",
-            "Name",
-            "Quantity",
-            "Price"
-        );
-        System.out.println("=============================================================================================");
-    }
+    System.out.println("======================================================================================================");
+    System.out.printf(
+        "%-25s | %-15s | %-25s | %12s | %13s%n",
+        "ID",
+        "Category",
+        "Name",
+        "Quantity",
+        "Price"
+    );
+    System.out.println("======================================================================================================");
+}
     
-    public void sortByQuantity() {
-        
+    public void sortByQuantity(boolean ascending) {
+
         for (int i = 0; i < items.size() - 1; i++) {
+
             for (int j = 0; j < items.size() - 1 - i; j++) {
-                if (items.get(j).getQuantity() > items.get(j + 1).getQuantity()) {
+
+                boolean shouldSwap;
+
+                if (ascending) {
+                    shouldSwap =
+                        items.get(j).getQuantity() > items.get(j + 1).getQuantity();
+                } else {
+                    shouldSwap =
+                        items.get(j).getQuantity() < items.get(j + 1).getQuantity();
+                }
+
+                if (shouldSwap) {
+
                     Item temp = items.get(j);
                     items.set(j, items.get(j + 1));
                     items.set(j + 1, temp);
@@ -121,10 +134,22 @@ public class Inventory {
     }
     
     
-    public void sortByPrice() {
+    public void sortByPrice(boolean ascending) {
         for (int i = 0; i < items.size() - 1; i++) {
+
             for (int j = 0; j < items.size() - 1 - i; j++) {
-                if (items.get(j).getPrice() > items.get(j + 1).getPrice()) {
+
+                boolean shouldSwap;
+
+                if (ascending) {
+                    shouldSwap =
+                        items.get(j).getPrice() > items.get(j + 1).getPrice();
+                } else {
+                    shouldSwap =
+                        items.get(j).getPrice() < items.get(j + 1).getPrice();
+                }
+
+                if (shouldSwap) {
 
                     Item temp = items.get(j);
                     items.set(j, items.get(j + 1));
@@ -138,11 +163,16 @@ public class Inventory {
         boolean found = false;
         for (Item item : items) {
             if (item.getQuantity() <= 5) {
+                if (!found) {
+                    displayTableHeader();   // ← was missing
+                }
                 item.displayInfo();
                 found = true;
             }
         }
-        if (!found) {
+        if (found) {
+            System.out.println("=============================================================================================");
+        } else {
             System.out.println("No low stock items.");
         }
     }
