@@ -195,7 +195,7 @@ public static void printMessage(String message) {
                             } else {
                                 inventory.displayTableHeader();
                                 searchItem.displayInfo();
-                                System.out.println("=============================================================================================");
+                                System.out.println("==============================================================================================================");
                             }
                         }
                         break;
@@ -241,8 +241,14 @@ public static void printMessage(String message) {
                         System.out.println("Program exited!");
                         loop = false;
                         break;
+
+                    default:
+                        printMessage("Invalid Choice!");
+                            break;
+
                 }
                 System.out.println();
+
             }
     sc.close();
     }
