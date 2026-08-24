@@ -133,8 +133,7 @@ public class Inventory {
                 }
             }
         }
-    }
-    
+    }    
     
     public void sortByPrice(boolean ascending) {
         for (int i = 0; i < items.size() - 1; i++) {

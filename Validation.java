@@ -53,7 +53,6 @@ public class Validation {
             }
         }
 
-    
         public String getItemID(Scanner sc, Inventory inventory) {
 
             boolean valid = false;
@@ -126,12 +125,12 @@ public class Validation {
                     System.out.println("Quantity cannot be empty!");
                 } else if (!input.matches("[1-9]\\d*")) {
                     System.out.println("Invalid quantity! Please enter a whole number greater than 0.");
-                } else if (input.length() > 5) {
-                    System.out.println("Invalid quantity! Maximum quantity is 10,000.");
+                } else if (input.length() > 6) {
+                    System.out.println("Invalid quantity! Maximum quantity is 100,000.");
                 } else {
                     quantity = Integer.parseInt(input);
-                    if (quantity > 10000) {
-                        System.out.println("Invalid quantity! Maximum quantity is 10,000.");
+                    if (quantity > 100000) {
+                        System.out.println("Invalid quantity! Maximum quantity is 100,000.");
                     } else {
                         valid = true;
                     }
@@ -140,30 +139,29 @@ public class Validation {
             return quantity;
         }
 
+        public double getPrice(Scanner sc) {
+            boolean valid = false;
+            double price = 0;
 
-       public double getPrice(Scanner sc) {
-        boolean valid = false;
-        double price = 0;
+            while (!valid) {
 
-        while (!valid) {
+                System.out.print("Enter price: ");
+                String input = sc.nextLine();
 
-            System.out.print("Enter price: ");
-            String input = sc.nextLine();
+                if (input.isEmpty()) {
 
-            if (input.isEmpty()) {
+                    System.out.println("Price cannot be empty!");
 
-                System.out.println("Price cannot be empty!");
+                } else if (!input.matches("[1-9]\\d*(\\.\\d+)?")) {
 
-            } else if (!input.matches("[1-9]\\d*(\\.\\d+)?")) {
+                    System.out.println("Invalid price! Please enter a valid number.");
 
-                System.out.println("Invalid price! Please enter a valid number.");
+                } else {
 
-            } else {
-
-                price = Double.parseDouble(input);
-                valid = true;
+                    price = Double.parseDouble(input);
+                    valid = true;
+                }
             }
-        }
 
         return price;
         }
@@ -241,6 +239,7 @@ public class Validation {
 
             return quantity;
         }
+        
         public int getOrderChoice(Scanner sc) {
         boolean valid = false;
         int choice = 0;
