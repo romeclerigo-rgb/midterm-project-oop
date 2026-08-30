@@ -165,7 +165,7 @@ public class Inventory {
         for (Item item : items) {
             if (item.getQuantity() <= 5) {
                 if (!found) {
-                    displayTableHeader();   // ← was missing
+                    displayTableHeader();  
                 }
                 item.displayInfo();
                 found = true;

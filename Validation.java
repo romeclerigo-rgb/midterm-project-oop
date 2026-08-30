@@ -69,23 +69,22 @@ public class Validation {
                 } else if (input.length() > 25) {
                     System.out.println("Invalid ID! Maximum length is 25 characters.");
 
-                } else if (!input.matches("[A-Za-z0-9-]+")) {
+                } else if (!input.matches("(?=.*[A-Za-z])(?=.*\\d)[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*")) {
                     System.out.println(
-                        "Invalid ID! Please use letters, numbers, and hyphens only.");
-
-                } else if (!input.matches(".*[A-Za-z0-9].*")) {
-                    System.out.println(
-                        "Invalid ID! ID must contain at least one letter or number.");
+                        "Invalid ID! ID must contain at least one letter and one number. Dashes are allowed only between characters."
+                    );
 
                 } else if (inventory.idExists(input)) {
                     System.out.println(
-                        "ID already exists! Please enter a different ID.");
+                        "ID already exists! Please enter a different ID."
+                    );
 
                 } else {
                     id = input;
                     valid = true;
                 }
             }
+
             return id;
         }
 
@@ -245,8 +244,8 @@ public class Validation {
         int choice = 0;
 
         while (!valid) {
-            System.out.println("\n1. Ascending");
-            System.out.println("2. Descending");
+            System.out.println("\n1. Ascending Price");
+            System.out.println("2. Descending Price");
             System.out.print("Enter your choice: ");
             String input = sc.nextLine();
 

@@ -184,20 +184,28 @@ public static void printMessage(String message) {
                             printMessage("No items yet.");
 
                         } else {
+
                             printHeader("SEARCH ITEM");
+
                             System.out.print("Enter ID: ");
                             String searchID = sc.nextLine();
 
                             Item searchItem = inventory.findItem(searchID);
 
                             if (searchItem == null) {
-                                printMessage("Item not found!");
+
+                                printMessage("Item \"" + searchID + "\" not found.");
+
                             } else {
+
+                                printMessage("Item \"" + searchItem.getName() + "\" found.");
+
                                 inventory.displayTableHeader();
                                 searchItem.displayInfo();
                                 System.out.println("==============================================================================================================");
                             }
                         }
+
                         break;
 
                     case 7:
@@ -219,9 +227,9 @@ public static void printMessage(String message) {
                                     break;
                             }
                             if (ascending) {
-                                printMessage("Items sorted in Ascending order successfully!");
+                                printMessage("Items sorted in Ascending Price order successfully!");
                             } else {
-                                printMessage("Items sorted in Descending order successfully!");
+                                printMessage("Items sorted in Descending Price order successfully!");
                             }
                             inventory.displayAllItems();
                         }
