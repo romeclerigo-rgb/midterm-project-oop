@@ -62,7 +62,7 @@ public class Inventory {
         }
         return removed;
     }
-    //polymorphism
+    
     public void displayByCategory(String category) {
         boolean found = false;
 

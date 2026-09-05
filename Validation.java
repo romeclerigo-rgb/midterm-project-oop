@@ -240,23 +240,23 @@ public class Validation {
         }
         
         public int getOrderChoice(Scanner sc) {
-        boolean valid = false;
-        int choice = 0;
+            boolean valid = false;
+            int choice = 0;
 
-        while (!valid) {
-            System.out.println("\n1. Ascending Price");
-            System.out.println("2. Descending Price");
-            System.out.print("Enter your choice: ");
-            String input = sc.nextLine();
+            while (!valid) {
+                System.out.println("\n1. Ascending Price");
+                System.out.println("2. Descending Price");
+                System.out.print("Enter your choice: ");
+                String input = sc.nextLine();
 
-            if (input.matches("[1-2]")) {
-                choice = Integer.parseInt(input);
-                valid = true;
-            } else {
-                System.out.println("Invalid input! Please enter 1 or 2 only.");
+                if (input.matches("[1-2]")) {
+                    choice = Integer.parseInt(input);
+                    valid = true;
+                } else {
+                    System.out.println("Invalid input! Please enter 1 or 2 only.");
+                }
             }
+            return choice;
         }
-        return choice;
-    }
 
 }
