@@ -28,7 +28,7 @@ public class Validation {
     }
         
         public String getCategory(Scanner sc) {
-
+            System.out.println("Categories Available: (Electronics, Clothing, or Entertainment)");
             System.out.print("Enter category: ");
             String input = sc.nextLine();
 

@@ -83,7 +83,6 @@ public static void printMessage(String message) {
 
                     case 2:
                         if (inventory.isEmpty()) {
-
                             printMessage("No items yet.");
 
                         } else {
