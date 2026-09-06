@@ -125,11 +125,11 @@ public class Validation {
                 } else if (!input.matches("[1-9]\\d*")) {
                     System.out.println("Invalid quantity! Please enter a whole number greater than 0.");
                 } else if (input.length() > 6) {
-                    System.out.println("Invalid quantity! Maximum quantity is 100,000.");
+                    System.out.println("Invalid quantity! Maximum quantity is 999,999.");
                 } else {
                     quantity = Integer.parseInt(input);
-                    if (quantity > 100000) {
-                        System.out.println("Invalid quantity! Maximum quantity is 100,000.");
+                    if (quantity > 999999) {
+                        System.out.println("Invalid quantity! Maximum quantity is 999,999.");
                     } else {
                         valid = true;
                     }
@@ -153,16 +153,28 @@ public class Validation {
 
                 } else if (!input.matches("[1-9]\\d*(\\.\\d+)?")) {
 
-                    System.out.println("Invalid price! Please enter a valid number.");
+                    System.out.println(
+                        "Invalid price! Please enter a valid number."
+                    );
 
                 } else {
 
                     price = Double.parseDouble(input);
-                    valid = true;
+
+                    if (price > 99_000_000_000.00) {
+
+                        System.out.println(
+                            "Invalid price! Maximum price is Php99,000,000,000.00."
+                        );
+
+                    } else {
+
+                        valid = true;
+                    }
                 }
             }
 
-        return price;
+            return price;
         }
 
         public int getUpdateChoice(Scanner sc) {
@@ -213,20 +225,20 @@ public class Validation {
                         "Invalid quantity! Please enter a whole number."
                     );
 
-                } else if (input.length() > 5) {
+                } else if (input.length() > 6) {
 
                     System.out.println(
-                        "Invalid quantity! Maximum quantity is 10,000."
+                        "Invalid quantity! Maximum quantity is 999,999."
                     );
 
                 } else {
 
                     quantity = Integer.parseInt(input);
 
-                    if (quantity > 10000) {
+                    if (quantity > 999999) {
 
                         System.out.println(
-                            "Invalid quantity! Maximum quantity is 10,000."
+                            "Invalid quantity! Maximum quantity is 999,999."
                         );
 
                     } else {
