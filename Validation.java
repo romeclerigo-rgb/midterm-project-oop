@@ -161,10 +161,10 @@ public class Validation {
 
                     price = Double.parseDouble(input);
 
-                    if (price > 99_000_000_000.00) {
+                    if (price > 99_999_999_999.99) {
 
                         System.out.println(
-                            "Invalid price! Maximum price is Php99,000,000,000.00."
+                            "Invalid price! Maximum price is Php99,999,999,999.99."
                         );
 
                     } else {
