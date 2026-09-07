@@ -106,24 +106,32 @@ public static void printMessage(String message) {
 
                                     case 1:
                                         int oldQuantity = updateItem.getQuantity();
-                                        int newQuantity = validation.getUpdateQuantity(sc);
-                                        inventory.updateQuantity(updateItem, newQuantity);
+                                        int newQuantity = validation.getQuantity(sc);
 
-                                        printMessage("Quantity of " + updateItem.getName()
-                                                + " updated from " + oldQuantity
-                                                + " to " + newQuantity + ".");
+                                        if (newQuantity == oldQuantity) {
+                                            printMessage("Quantity didn't update because it is the same.");
+                                        } else {
+                                            inventory.updateQuantity(updateItem, newQuantity);
+
+                                            printMessage("Quantity of " + updateItem.getName()
+                                                    + " updated from " + oldQuantity
+                                                    + " to " + newQuantity + ".");
+                                        }
                                         break;
 
                                     case 2:
                                         double oldPrice = updateItem.getPrice();
                                         double newPrice = validation.getPrice(sc);
 
-                                        inventory.updatePrice(updateItem, newPrice);
+                                        if (newPrice == oldPrice) {
+                                            printMessage("Price didn't update because it is the same.");
+                                        } else {
+                                            inventory.updatePrice(updateItem, newPrice);
 
-                                        printMessage("Price of " + updateItem.getName()
-                                                + " updated from Php" + String.format("%,.2f", oldPrice)
-                                                + " to Php" + String.format("%,.2f", newPrice) + ".");
-
+                                            printMessage("Price of " + updateItem.getName()
+                                                    + " updated from Php" + String.format("%,.2f", oldPrice)
+                                                    + " to Php" + String.format("%,.2f", newPrice) + ".");
+                                        }
                                         break;
                                 }
                             }
